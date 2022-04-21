@@ -187,7 +187,7 @@ class Model {
   }
 
   serializerOptions(): SerializerOptions {
-    const object: SerializerOptions = {};
+    const object: SerializerOptions = {keyForAttribute: 'underscore_case'};
 
     // eslint-disable-next-line
     // @ts-ignore
