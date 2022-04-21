@@ -210,7 +210,7 @@ class Model {
   }
 
   static deserializerOptions: DeserializerOptions = {
-    keyForAttribute: 'camelCase',
+    keyForAttribute: 'underscore_case',
   };
 
   serialize(): object {
