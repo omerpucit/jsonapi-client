@@ -24,7 +24,7 @@ enum HttpVerb {
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 type RequestHeaders = {
-  'content-type': 'application/json';
+  'content-type': 'application/vnd.api+json';
   [k: string]: string;
 };
 
@@ -70,7 +70,7 @@ class HttpAdapter implements HttpAdapterInterface {
     this.host = args.host || args.baseURL || '';
     this.namespace = args.namespace || '';
     this.headers = {
-      'content-type': 'application/json',
+      'content-type': 'application/vnd.api+json',
       ...args.headers,
     };
   }
