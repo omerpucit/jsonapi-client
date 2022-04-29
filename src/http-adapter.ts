@@ -48,6 +48,7 @@ export type HttpAdapterConstructor = {
   baseURL?: string;
   namespace?: string;
   headers?: object;
+  onErrorCallback?: (errors: ResponsePayload) => ResponsePayload;
 };
 
 interface HttpAdapterInterface {
@@ -59,12 +60,14 @@ interface HttpAdapterInterface {
   put(url: string, data: object): HttpResponse;
   patch(url: string, data: object): HttpResponse;
   delete(url: string): HttpResponse;
+  onErrorCallback?: (errors: ResponsePayload) => ResponsePayload;
 }
 
 class HttpAdapter implements HttpAdapterInterface {
   host: string;
   namespace: string;
   headers: RequestHeaders;
+  onErrorCallback?: (errors: ResponsePayload) => ResponsePayload;
 
   constructor(args: HttpAdapterConstructor = {}) {
     this.host = args.host || args.baseURL || '';
@@ -73,6 +76,13 @@ class HttpAdapter implements HttpAdapterInterface {
       'content-type': 'application/vnd.api+json',
       ...args.headers,
     };
+    if(args.onErrorCallback) {
+      this.onErrorCallback = args.onErrorCallback;
+    }
+  }
+
+  runCallBack(errors: ResponsePayload): void {
+    this.onErrorCallback(errors);
   }
 
   extractResponseHeaders(response: FetchResponse): object {
@@ -102,11 +112,13 @@ class HttpAdapter implements HttpAdapterInterface {
         try {
           payload.data = JSON.parse(text);
         } catch (err) {
+          this.runCallBack(payload);
           payload.data = undefined;
         } finally {
           if (response.ok) {
             return payload;
           }
+          this.runCallBack(payload);
           throw payload;
         }
       });
