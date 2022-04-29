@@ -48,7 +48,7 @@ export type HttpAdapterConstructor = {
   baseURL?: string;
   namespace?: string;
   headers?: object;
-  onErrorCallback?: (errors: ResponsePayload) => ResponsePayload;
+  onErrorCallback?: (errors: ResponsePayload) => void;
 };
 
 interface HttpAdapterInterface {
@@ -60,14 +60,14 @@ interface HttpAdapterInterface {
   put(url: string, data: object): HttpResponse;
   patch(url: string, data: object): HttpResponse;
   delete(url: string): HttpResponse;
-  onErrorCallback?: (errors: ResponsePayload) => ResponsePayload;
+  onErrorCallback?: (errors: ResponsePayload) => void;
 }
 
 class HttpAdapter implements HttpAdapterInterface {
   host: string;
   namespace: string;
   headers: RequestHeaders;
-  onErrorCallback?: (errors: ResponsePayload) => ResponsePayload;
+  onErrorCallback?: (errors: ResponsePayload) => void;
 
   constructor(args: HttpAdapterConstructor = {}) {
     this.host = args.host || args.baseURL || '';
