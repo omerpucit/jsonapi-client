@@ -100,7 +100,6 @@ class HttpAdapter implements HttpAdapterInterface {
       method,
       headers: this.headers,
       progress: (e) => {
-        console.log('it is coming into the main prgoress area', e);
         if(extraOptions && extraOptions.onProgress) {
           extraOptions.onProgress(e)
         }
