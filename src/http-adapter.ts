@@ -93,7 +93,7 @@ class HttpAdapter implements HttpAdapterInterface {
     return object;
   }
 
-  request(method: HttpMethod, url: string, data?: object, extraOptions?: object): HttpResponse {
+  request(method: HttpMethod, url: string, data?: object, extraOptions?: any): HttpResponse {
     const endpoint: string = this.host + this.namespace + url;
     const onProgress = (extraOptions && extraOptions.onProgress) ? extraOptions.onProgress : (e) => {}
     const options: RequestOptions = {
