@@ -98,11 +98,14 @@ class HttpAdapter implements HttpAdapterInterface {
     const endpoint: string = this.host + this.namespace + url;
     const options: RequestOptions = {
       method,
-      headers: this.headers
+      headers: this.headers,
+      progress: (e) => {
+        console.log('it is coming into the main prgoress area', e);
+        if(extraOptions && extraOptions.onProgress) {
+          extraOptions.onProgress(e)
+        }
+      }
     };
-    if(extraOptions && extraOptions.onProgress) {
-      options.progress = (e) => { extraOptions.onProgress(e) }
-    }
     if (data) {
       options.body = JSON.stringify(data);
     }
