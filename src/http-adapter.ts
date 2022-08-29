@@ -32,6 +32,7 @@ type RequestOptions = {
   method: HttpMethod;
   headers: RequestHeaders;
   body?: string;
+  progress?: any
 };
 
 export type ResponsePayload = {
