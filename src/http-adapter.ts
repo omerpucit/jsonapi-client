@@ -101,7 +101,7 @@ class HttpAdapter implements HttpAdapterInterface {
       headers: this.headers
     };
     if(extraOptions && extraOptions.onProgress) {
-      options.progress = (e) => onProgress(e)
+      options.progress = (e) => { extraOptions.onProgress(e) }
     }
     if (data) {
       options.body = JSON.stringify(data);
