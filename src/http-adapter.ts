@@ -95,8 +95,6 @@ class HttpAdapter implements HttpAdapterInterface {
   }
 
   request(method: HttpMethod, url: string, data?: object, extraOptions?: any): HttpResponse {
-    // const appendLiveSurvey: boolean = (extraOptions && extraOptions.appendLiveSurvey) || false;
-    // const endpoint: string = appendLiveSurvey ? this.host.replace('/api/v1', '/survey/v1') + this.namespace + url  : this.host + this.namespace + url;
     const endpoint: string = this.host + this.namespace + url;
     const options: RequestOptions = {
       method,
