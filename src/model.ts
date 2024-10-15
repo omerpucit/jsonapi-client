@@ -229,11 +229,12 @@ class Model {
       | Collection<Model> => {
       if (Array.isArray(data)) {
         const collection: Collection<Model> = data.map((object) => new this(object));
-        if (data.links) {
-          collection.links = data.links;
+        const dataWithLinksAndMeta = data as Collection<any>;
+        if (dataWithLinksAndMeta.links) {
+          collection.links = dataWithLinksAndMeta.links;
         }
-        if (data.meta) {
-          collection.meta = data.meta;
+        if (dataWithLinksAndMeta.meta) {
+          collection.meta = dataWithLinksAndMeta.meta;
         }
         return collection;
       }
